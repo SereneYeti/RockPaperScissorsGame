@@ -92,7 +92,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGt-aj-uAl">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="210.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="168.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Chosen AI">
                                                 <attributes>
@@ -104,29 +104,70 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AI Choice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oS2-QK-rJX">
+                                        <rect key="frame" x="0.0" y="168.5" width="414" height="168.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rock, Paper, Scissors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSA-mR-P9Y">
-                                        <rect key="frame" x="0.0" y="210.5" width="414" height="210.5"/>
+                                        <rect key="frame" x="0.0" y="337" width="414" height="168"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbJ-3z-EAr" userLabel="PlayerChoices_SV">
-                                        <rect key="frame" x="0.0" y="421" width="414" height="210.5"/>
+                                        <rect key="frame" x="0.0" y="505" width="414" height="168.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ot-GZ-3dM">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="210.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="168.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="🪨">
+                                                            <attributes>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <font key="NSFont" size="48" name="AppleColorEmoji"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="btnChooseRock:" destination="j86-dF-I7q" eventType="touchUpInside" id="rUR-gJ-UOo"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsq-O3-YF4">
-                                                <rect key="frame" x="138" y="0.0" width="138" height="210.5"/>
+                                                <rect key="frame" x="138" y="0.0" width="138" height="168.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="📜">
+                                                            <attributes>
+                                                                <font key="NSFont" size="36" name="AppleColorEmoji"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="btnChoosePaper:" destination="j86-dF-I7q" eventType="touchUpInside" id="IWc-zM-YqU"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDi-St-xeS">
-                                                <rect key="frame" x="276" y="0.0" width="138" height="210.5"/>
+                                                <rect key="frame" x="276" y="0.0" width="138" height="168.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="✂️">
+                                                            <attributes>
+                                                                <font key="NSFont" size="36" name="AppleColorEmoji"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="btnChooseScissors:" destination="j86-dF-I7q" eventType="touchUpInside" id="CNi-Qz-Nwb"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -135,26 +176,49 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjL-6c-x1a" userLabel="Info_Replay_SV">
-                                        <rect key="frame" x="0.0" y="631.5" width="414" height="210.5"/>
+                                        <rect key="frame" x="0.0" y="673.5" width="414" height="168.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl1-Xr-GYQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="210.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tally" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl1-Xr-GYQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="168.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HWH-Ag-7Ob">
-                                                <rect key="frame" x="207" y="0.0" width="207" height="210.5"/>
+                                                <rect key="frame" x="207" y="0.0" width="207" height="168.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTV-0Y-Oud">
-                                                        <rect key="frame" x="0.0" y="0.0" width="207" height="105.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="207" height="84.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Throw">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="24" name="Arial-BoldMT"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="btnMakeThrow:" destination="j86-dF-I7q" eventType="touchUpInside" id="HAY-qQ-Vjq"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4D-XB-0Oc">
-                                                        <rect key="frame" x="0.0" y="105.5" width="207" height="105"/>
+                                                        <rect key="frame" x="0.0" y="84.5" width="207" height="84"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Return to Main Menu">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="24" name="Arial-BoldMT"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="btnReturnMainMenu:" destination="j86-dF-I7q" eventType="touchUpInside" id="DjE-np-rY8"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -167,11 +231,11 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstItem="XbJ-3z-EAr" firstAttribute="height" secondItem="WSA-mR-P9Y" secondAttribute="height" id="Lna-0O-X1B"/>
                                     <constraint firstItem="bjL-6c-x1a" firstAttribute="height" secondItem="XbJ-3z-EAr" secondAttribute="height" id="Ylc-kI-kPL"/>
                                     <constraint firstItem="WSA-mR-P9Y" firstAttribute="height" secondItem="kGt-aj-uAl" secondAttribute="height" id="n9e-cO-rtY"/>
+                                    <constraint firstItem="oS2-QK-rJX" firstAttribute="height" secondItem="WSA-mR-P9Y" secondAttribute="height" id="pRz-vE-YxA"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -186,7 +250,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="H36-WO-g35"/>
                     <connections>
+                        <outlet property="btnChoosePaper_Outlet" destination="jsq-O3-YF4" id="5H0-9g-fUc"/>
+                        <outlet property="btnChooseRock_Outlet" destination="3ot-GZ-3dM" id="NSy-f1-CVE"/>
+                        <outlet property="btnChooseScisors_Outlet" destination="XDi-St-xeS" id="UTG-L7-ZLQ"/>
                         <outlet property="lblChosen_AI" destination="kGt-aj-uAl" id="UHl-DB-xFg"/>
+                        <outlet property="lblGameTally" destination="Fl1-Xr-GYQ" id="k4O-Hd-IL8"/>
+                        <outlet property="lbl_AI_Choice" destination="oS2-QK-rJX" id="ZSS-bu-A26"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GTr-aE-vy3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
