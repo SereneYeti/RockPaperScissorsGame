@@ -18,12 +18,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func btnRandomAI(_ sender: Any) {
-        print("Random AI")
+        //print("Random AI")
         PlayerAIChoice = 0;
     }
     
     @IBAction func btnFSM_AI(_ sender: Any) {
-        print("Finite State Machine AI")
+        //print("Finite State Machine AI")
         PlayerAIChoice = 1;
     }
 }

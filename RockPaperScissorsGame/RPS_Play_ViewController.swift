@@ -11,14 +11,33 @@ class RPS_Play_ViewController: UIViewController {
     
     enum ChosenAI {
     case RandomAI, FSM_AI
+        
+    var description : String {
+               switch self {
+               // Use Internationalization, as appropriate.
+               case .RandomAI: return "Random AI"
+               case .FSM_AI: return "Finite State Machine AI"
+               }
+            }
     }
     
     var chosenAI:ChosenAI = .RandomAI;
     
     enum ThrowChoices {
     case Rock, Paper, Scissors
+        
+    var description : String {
+           switch self {
+           // Use Internationalization, as appropriate.
+           case .Rock: return "Rock"
+           case .Paper: return "Paper"
+           case .Scissors: return "Scissors"
+           }
+        }
     }
+    //We give the AI a default value but not the player as we will always need a value for the AI even if the AI breaks otherwise we will break the program. While the Player cannot complete his turn without a value.
     var playerThrowChoice:ThrowChoices?
+    var AIThrowCoice:ThrowChoices = .Paper;
     var prevPlayerThrowChoice:ThrowChoices?
     var iPlayerWins:Int = 0;
     var iComputerWins:Int = 0;
@@ -49,7 +68,7 @@ class RPS_Play_ViewController: UIViewController {
         btnChooseRock_Outlet.backgroundColor = .systemGray;
         btnChooseScisors_Outlet.backgroundColor = .clear;
         btnChoosePaper_Outlet.backgroundColor = .clear;
-        print("Rock")
+        print(playerThrowChoice!.description)
     }
     @IBOutlet weak var btnChoosePaper_Outlet: UIButton!
     @IBAction func btnChoosePaper(_ sender: Any) {
@@ -57,7 +76,7 @@ class RPS_Play_ViewController: UIViewController {
         btnChooseScisors_Outlet.backgroundColor = .clear;
         btnChoosePaper_Outlet.backgroundColor = .systemGray;
         btnChooseRock_Outlet.backgroundColor = .clear;
-        print("Paper")
+        print(playerThrowChoice!.description)
     }
     @IBOutlet weak var btnChooseScisors_Outlet: UIButton!
     @IBAction func btnChooseScissors(_ sender: Any) {
@@ -65,13 +84,40 @@ class RPS_Play_ViewController: UIViewController {
         btnChooseScisors_Outlet.backgroundColor = .systemGray;
         btnChoosePaper_Outlet.backgroundColor = .clear;
         btnChooseRock_Outlet.backgroundColor = .clear;
-        print("Scissors")
+        print(playerThrowChoice!.description)
     }
+    func DoAIMove() {
+        switch chosenAI {
+        case .RandomAI:
+            //Do Random AI
+            AIThrowCoice = DoRandomAIMove()
+            break;
+        case .FSM_AI:
+            //Do Finite State Machine AI
+            break;
+        }
+    }
+    
     @IBAction func btnMakeThrow(_ sender: Any) {
         if(playerThrowChoice != nil){
             prevPlayerThrowChoice = playerThrowChoice;
-            playerThrowChoice = nil;
+            DoAIMove();
+            switch DetermineThrowWinner(Throw1: playerThrowChoice!, Throw2: AIThrowCoice) {
+            case 0:
+                //This is a Tie
+                break;
+            case 1:
+                //Throw1 in this case player 1 will win
+                break;
+            case 2:
+                //Throw2 in this case teh computer will win
+                break;
+            default:
+                break;
+            }
+            return;
         }
+        playerThrowChoice = nil;
     }
     @IBAction func btnReturnMainMenu(_ sender: Any) {
         //Return to Main Menu
@@ -82,17 +128,17 @@ class RPS_Play_ViewController: UIViewController {
     func _PlayerAIChoice() {
        switch (PlayerAIChoice) {
        case 0:
-           print("Random AI")
            view.backgroundColor = .systemTeal
            chosenAI = ChosenAI.RandomAI;
+           print(chosenAI.description)
            textColour = .systemIndigo
            lblChosen_AI.text = "Random AI";
            lblChosen_AI.textColor = textColour;
            break;
        case 1:
-           print("FSM AI")
            view.backgroundColor = .systemPink
            chosenAI = ChosenAI.FSM_AI;
+           print(chosenAI.description)
            textColour = UIColor.black;
            lblChosen_AI.text = "Finite State Machine AI";
            lblChosen_AI.textColor = textColour;
@@ -111,9 +157,68 @@ class RPS_Play_ViewController: UIViewController {
         btnChooseRock_Outlet.titleLabel?.adjustsFontSizeToFitWidth = true;
         btnChooseScisors_Outlet.titleLabel?.adjustsFontSizeToFitWidth = true;
         btnChoosePaper_Outlet.titleLabel?.adjustsFontSizeToFitWidth = true;
-        
+                    
         lbl_AI_Choice.textColor = textColour;
         lblGameTally.text = "Best of 3- Tally:\nPlayer Wins: " + String(iPlayerWins) + "\nAI Wins: " + String(iComputerWins);
+    }
+    
+    //0 = tie, 1 = Throw1, 2 = Throw2
+    func DetermineThrowWinner(Throw1:ThrowChoices,Throw2:ThrowChoices) -> Int {
+        // < R < P < S
+        //I.E Rock Beats Scissors, Paper Beats Rock, Scissors Beats Paper
+        
+        var ans:Int = 0;
+        
+        if(Throw1 == .Rock && Throw2 == .Paper){
+            ans = 2;
+        }
+        else if(Throw1 == .Rock && Throw2 == .Scissors){
+            ans = 1;
+        }
+        else if(Throw1 == .Rock && Throw2 == .Rock){
+            ans = 0;
+        }
+        else if(Throw1 == .Scissors && Throw2 == .Paper){
+            ans = 1;
+        }
+        else if(Throw1 == .Scissors && Throw2 == .Scissors){
+            ans = 0;
+        }
+        else if(Throw1 == .Scissors && Throw2 == .Rock){
+            ans = 2;
+        }
+        else if(Throw1 == .Paper && Throw2 == .Paper){
+            ans = 0;
+        }
+        else if(Throw1 == .Paper && Throw2 == .Scissors){
+            ans = 2;
+        }
+        else if(Throw1 == .Paper && Throw2 == .Rock){
+            ans = 1;
+        }
+        
+        
+        
+        return ans;
+    }
+    func DoRandomAIMove()->ThrowChoices{
+        var ans:ThrowChoices = .Paper;
+        
+        let randInt = Int.random(in: 1...3)
+        
+        switch(randInt){
+        case 1:
+            ans = .Rock;
+            return ans
+        case 2:
+            ans = .Paper;
+            return ans
+        case 3:
+            ans = .Scissors;
+            return ans
+        default:
+            return ans;
+        }
     }
     
     

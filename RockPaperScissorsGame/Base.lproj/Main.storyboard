@@ -21,6 +21,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBc-ca-Q8L">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="444"/>
+                                        <color key="tintColor" systemColor="systemIndigoColor"/>
                                         <buttonConfiguration key="configuration" style="gray" subtitle="" titleAlignment="automatic">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Random AI">
@@ -41,6 +42,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAo-OM-lFt">
                                         <rect key="frame" x="0.0" y="452" width="414" height="444"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" titleAlignment="automatic">
                                             <attributedString key="attributedTitle">
@@ -110,19 +112,40 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rock, Paper, Scissors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSA-mR-P9Y">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yyb-ds-wvf">
                                         <rect key="frame" x="0.0" y="337" width="414" height="168"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rock," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlh-At-B1S">
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="168"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paper," textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6d-zw-6ET">
+                                                <rect key="frame" x="138" y="0.0" width="138" height="168"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scissors" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23x-4x-scG">
+                                                <rect key="frame" x="276" y="0.0" width="138" height="168"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="xlh-At-B1S" firstAttribute="width" secondItem="f6d-zw-6ET" secondAttribute="width" id="QVg-ZL-71O"/>
+                                            <constraint firstItem="f6d-zw-6ET" firstAttribute="width" secondItem="23x-4x-scG" secondAttribute="width" id="aln-NU-dkJ"/>
+                                        </constraints>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbJ-3z-EAr" userLabel="PlayerChoices_SV">
                                         <rect key="frame" x="0.0" y="505" width="414" height="168.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ot-GZ-3dM">
                                                 <rect key="frame" x="0.0" y="0.0" width="138" height="168.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain">
+                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule" titleAlignment="automatic">
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="🪨">
                                                             <attributes>
@@ -140,7 +163,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsq-O3-YF4">
                                                 <rect key="frame" x="138" y="0.0" width="138" height="168.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain">
+                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule" titleAlignment="automatic">
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="📜">
                                                             <attributes>
@@ -156,7 +179,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDi-St-xeS">
                                                 <rect key="frame" x="276" y="0.0" width="138" height="168.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain">
+                                                <buttonConfiguration key="configuration" style="plain" cornerStyle="capsule" titleAlignment="automatic">
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="✂️">
                                                             <attributes>
@@ -189,11 +212,14 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTV-0Y-Oud">
                                                         <rect key="frame" x="0.0" y="0.0" width="207" height="84.5"/>
+                                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                        <color key="tintColor" red="1.9728535349999999e-05" green="1.6795422240000001e-05" blue="1.93302133e-05" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain">
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="Throw">
                                                                     <attributes>
+                                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                         <font key="NSFont" size="24" name="Arial-BoldMT"/>
                                                                     </attributes>
                                                                 </fragment>
@@ -205,11 +231,14 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4D-XB-0Oc">
                                                         <rect key="frame" x="0.0" y="84.5" width="207" height="84"/>
+                                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                        <color key="tintColor" red="1.9728535349999999e-05" green="1.6795422240000001e-05" blue="1.93302133e-05" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain">
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="Return to Main Menu">
                                                                     <attributes>
+                                                                        <color key="NSColor" red="1.9728535353480403e-05" green="1.6795422242410254e-05" blue="1.9330213296992579e-05" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                         <font key="NSFont" size="24" name="Arial-BoldMT"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
@@ -226,16 +255,17 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
                                         <constraints>
                                             <constraint firstItem="Fl1-Xr-GYQ" firstAttribute="width" secondItem="HWH-Ag-7Ob" secondAttribute="width" id="hoN-W8-TVA"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="XbJ-3z-EAr" firstAttribute="height" secondItem="WSA-mR-P9Y" secondAttribute="height" id="Lna-0O-X1B"/>
+                                    <constraint firstItem="kGt-aj-uAl" firstAttribute="height" secondItem="oS2-QK-rJX" secondAttribute="height" id="7UQ-aP-gqX"/>
+                                    <constraint firstItem="Yyb-ds-wvf" firstAttribute="height" secondItem="oS2-QK-rJX" secondAttribute="height" id="VTj-qF-w3z"/>
                                     <constraint firstItem="bjL-6c-x1a" firstAttribute="height" secondItem="XbJ-3z-EAr" secondAttribute="height" id="Ylc-kI-kPL"/>
-                                    <constraint firstItem="WSA-mR-P9Y" firstAttribute="height" secondItem="kGt-aj-uAl" secondAttribute="height" id="n9e-cO-rtY"/>
-                                    <constraint firstItem="oS2-QK-rJX" firstAttribute="height" secondItem="WSA-mR-P9Y" secondAttribute="height" id="pRz-vE-YxA"/>
+                                    <constraint firstItem="XbJ-3z-EAr" firstAttribute="height" secondItem="Yyb-ds-wvf" secondAttribute="height" id="e60-Vk-jSB"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -267,8 +297,14 @@
         <segue reference="tQ4-Mi-dkq"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -276,11 +312,17 @@
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
