@@ -14,6 +14,7 @@
 		5A162FB9283D146F00B1A842 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A162FB8283D146F00B1A842 /* Assets.xcassets */; };
 		5A162FBC283D146F00B1A842 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A162FBA283D146F00B1A842 /* LaunchScreen.storyboard */; };
 		5A162FC4283D1B2700B1A842 /* RPS_Play_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A162FC3283D1B2700B1A842 /* RPS_Play_ViewController.swift */; };
+		5A162FC6283D5C8200B1A842 /* FiniteStateMachineAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A162FC5283D5C8200B1A842 /* FiniteStateMachineAI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5A162FBB283D146F00B1A842 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A162FBD283D146F00B1A842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A162FC3283D1B2700B1A842 /* RPS_Play_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPS_Play_ViewController.swift; sourceTree = "<group>"; };
+		5A162FC5283D5C8200B1A842 /* FiniteStateMachineAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiniteStateMachineAI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		5A162FA3283D146E00B1A842 = {
 			isa = PBXGroup;
 			children = (
+				5A162FC5283D5C8200B1A842 /* FiniteStateMachineAI.swift */,
 				5A162FAE283D146E00B1A842 /* RockPaperScissorsGame */,
 				5A162FAD283D146E00B1A842 /* Products */,
 			);
@@ -143,6 +146,7 @@
 			files = (
 				5A162FC4283D1B2700B1A842 /* RPS_Play_ViewController.swift in Sources */,
 				5A162FB4283D146E00B1A842 /* ViewController.swift in Sources */,
+				5A162FC6283D5C8200B1A842 /* FiniteStateMachineAI.swift in Sources */,
 				5A162FB0283D146E00B1A842 /* AppDelegate.swift in Sources */,
 				5A162FB2283D146E00B1A842 /* SceneDelegate.swift in Sources */,
 			);

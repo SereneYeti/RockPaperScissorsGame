@@ -7,6 +7,20 @@
 
 import UIKit
 
+enum ThrowChoices {
+case Rock, Paper, Scissors
+    
+var description : String {
+       switch self {
+       // Use Internationalization, as appropriate.
+       case .Rock: return "Rock"
+       case .Paper: return "Paper"
+       case .Scissors: return "Scissors"
+       }
+    }
+}
+
+
 class RPS_Play_ViewController: UIViewController {
     
     enum ChosenAI {
@@ -20,25 +34,13 @@ class RPS_Play_ViewController: UIViewController {
                }
             }
     }
-    
+    var fsmAI_Class:FiniteStateMachineAI = FiniteStateMachineAI.init();
     var chosenAI:ChosenAI = .RandomAI;
     
-    enum ThrowChoices {
-    case Rock, Paper, Scissors
         
-    var description : String {
-           switch self {
-           // Use Internationalization, as appropriate.
-           case .Rock: return "Rock"
-           case .Paper: return "Paper"
-           case .Scissors: return "Scissors"
-           }
-        }
-    }
-    //We give the AI a default value but not the player as we will always need a value for the AI even if the AI breaks otherwise we will break the program. While the Player cannot complete his turn without a value.
     var playerThrowChoice:ThrowChoices?
-    var aiThrowCoice:ThrowChoices = .Paper;
-    var prevPlayerThrowChoice:ThrowChoices?
+    var aiThrowCoice:ThrowChoices?
+    var iPrevWinner = -1;
     var iPlayerWins:Int = 0;
     var iComputerWins:Int = 0;
     
@@ -91,75 +93,44 @@ class RPS_Play_ViewController: UIViewController {
         case .RandomAI:
             //Do Random AI
             aiThrowCoice = DoRandomAIMove();
-            SetAIMoveChoiceLabel(aiThrowCoice);
+            SetAIMoveChoiceLabel(aiThrowCoice!);
             break;
         case .FSM_AI:
             //Do Finite State Machine AI
+            fsmAI_Class.DetermineState(prevWinner: iPrevWinner);            
+            aiThrowCoice = fsmAI_Class.GetMove();
+            SetAIMoveChoiceLabel(aiThrowCoice!);
             break;
         }
     }
-    func showTieAlert() {
-        let alert = UIAlertController(title: "Tie", message: "The Match was a Tie! Throw Again!", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-             //print("Ok button tapped")
-            alert.dismiss(animated: true, completion: nil)
-          })
-         
-         //Add OK button to a dialog message
-         alert.addAction(ok)
-        self.present(alert, animated: true, completion: nil)
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
-    }
-    func showPlayerAlert() {
-        let alert = UIAlertController(title: "The Player Wins!", message: "The player won the throw, check the tally!", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-             //print("Ok button tapped")
-            alert.dismiss(animated: true, completion: nil)
-          })
-         
-         //Add OK button to a dialog message
-         alert.addAction(ok)
-        self.present(alert, animated: true, completion: nil)
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
-    }
-    func showComputerAlert() {
-        let alert = UIAlertController(title: "The Computer Wins!", message: "The Computer won the throw, check the tally!", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-             //print("Ok button tapped")
-            alert.dismiss(animated: true, completion: nil)
-          })
-         
-         //Add OK button to a dialog message
-         alert.addAction(ok)
-
-        self.present(alert, animated: true, completion: nil)
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
-    }
+    
     @IBAction func btnMakeThrow(_ sender: Any) {
         
         if(iPlayerWins == 3 || iComputerWins == 3)
         {
             iComputerWins = 0;
             iPlayerWins = 0;
-            BasicUISetup()
-            lbl_AI_Choice.text = "AI Choice"
+            aiThrowCoice = nil;
+            BasicUISetup();
+            lbl_AI_Choice.text = "AI Choice";
         }
         else
         {
             if(playerThrowChoice != nil){
-                prevPlayerThrowChoice = playerThrowChoice;
                 DoAIMove();
                 print("Player Move: " + playerThrowChoice!.description)
-                print("AI Move: " + aiThrowCoice.description)
-                switch DetermineThrowWinner(Throw1: playerThrowChoice!, Throw2: aiThrowCoice) {
+                print("AI Move: " + aiThrowCoice!.description)
+                switch DetermineThrowWinner(Throw1: playerThrowChoice!, Throw2: aiThrowCoice!) {
                 case 0:
                     //This is a Tie
                     showTieAlert();
+                    iPrevWinner = 0;
                     break;
                 case 1:
                     //Throw1 in this case player 1 will win
                     showPlayerAlert()
                     iPlayerWins+=1;
+                    iPrevWinner = 1;
                     BasicUISetup();
                     if(iPlayerWins == 3){
                         PlayerWins();
@@ -170,6 +141,7 @@ class RPS_Play_ViewController: UIViewController {
                     //Throw2 in this case teh computer will win
                     showComputerAlert()
                     iComputerWins+=1;
+                    iPrevWinner = 2;
                     BasicUISetup();
                     if(iComputerWins == 3){
                         ComputerWins();
@@ -276,9 +248,7 @@ class RPS_Play_ViewController: UIViewController {
         case .Paper:
             lbl_AI_Choice.text = sPaper;
         case .Scissors:
-            lbl_AI_Choice.text = sScissors;
-        default:
-            break;
+            lbl_AI_Choice.text = sScissors;        
         }
     }
     func DoRandomAIMove()->ThrowChoices{
@@ -309,6 +279,43 @@ class RPS_Play_ViewController: UIViewController {
         print("Computer Wins!")
         lblGameTally.text = "Match Complete!\nThe computer was the first to win 3 throws!"
         lbl_AI_Choice.text = "Press the Throw button to reset and play agin."
+    }
+    func showTieAlert() {
+        let alert = UIAlertController(title: "Tie", message: "The Match was a Tie! Throw Again!", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+             //print("Ok button tapped")
+            alert.dismiss(animated: true, completion: nil)
+          })
+         
+         //Add OK button to a dialog message
+         alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+    }
+    func showPlayerAlert() {
+        let alert = UIAlertController(title: "The Player Wins!", message: "The player won the throw, check the tally!", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+             //print("Ok button tapped")
+            alert.dismiss(animated: true, completion: nil)
+          })
+         
+         //Add OK button to a dialog message
+         alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+    }
+    func showComputerAlert() {
+        let alert = UIAlertController(title: "The Computer Wins!", message: "The Computer won the throw, check the tally!", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+             //print("Ok button tapped")
+            alert.dismiss(animated: true, completion: nil)
+          })
+         
+         //Add OK button to a dialog message
+         alert.addAction(ok)
+
+        self.present(alert, animated: true, completion: nil)
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
     }
     
     
