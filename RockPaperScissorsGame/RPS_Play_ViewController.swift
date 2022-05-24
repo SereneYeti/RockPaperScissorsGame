@@ -100,59 +100,92 @@ class RPS_Play_ViewController: UIViewController {
     }
     func showTieAlert() {
         let alert = UIAlertController(title: "Tie", message: "The Match was a Tie! Throw Again!", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+             //print("Ok button tapped")
+            alert.dismiss(animated: true, completion: nil)
+          })
+         
+         //Add OK button to a dialog message
+         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
     }
     func showPlayerAlert() {
         let alert = UIAlertController(title: "The Player Wins!", message: "The player won the throw, check the tally!", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+             //print("Ok button tapped")
+            alert.dismiss(animated: true, completion: nil)
+          })
+         
+         //Add OK button to a dialog message
+         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
     }
     func showComputerAlert() {
         let alert = UIAlertController(title: "The Computer Wins!", message: "The Computer won the throw, check the tally!", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+             //print("Ok button tapped")
+            alert.dismiss(animated: true, completion: nil)
+          })
+         
+         //Add OK button to a dialog message
+         alert.addAction(ok)
+
         self.present(alert, animated: true, completion: nil)
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
     }
     @IBAction func btnMakeThrow(_ sender: Any) {
         
-        if(playerThrowChoice != nil){
-            prevPlayerThrowChoice = playerThrowChoice;
-            DoAIMove();
-            print("Player Move: " + playerThrowChoice!.description)
-            print("AI Move: " + aiThrowCoice.description)
-            switch DetermineThrowWinner(Throw1: playerThrowChoice!, Throw2: aiThrowCoice) {
-            case 0:
-                //This is a Tie
-                showTieAlert();
-                break;
-            case 1:
-                //Throw1 in this case player 1 will win
-                showPlayerAlert()
-                iPlayerWins+=1;
-                BasicUISetup();
-                if(iPlayerWins == 3){
-                    PlayerWins();
-                    return;
-                }
-                break;
-            case 2:
-                //Throw2 in this case teh computer will win
-                showComputerAlert()
-                iComputerWins+=1;
-                BasicUISetup();
-                if(iComputerWins == 3){
-                    ComputerWins();
-                    return;
-                }
-                break;
-            default:
-                break;
-            }
-            btnChooseScisors_Outlet.backgroundColor = .clear;
-            btnChoosePaper_Outlet.backgroundColor = .clear;
-            btnChooseRock_Outlet.backgroundColor = .clear;
-            playerThrowChoice = nil;
+        if(iPlayerWins == 3 || iComputerWins == 3)
+        {
+            iComputerWins = 0;
+            iPlayerWins = 0;
+            BasicUISetup()
+            lbl_AI_Choice.text = "AI Choice"
         }
+        else
+        {
+            if(playerThrowChoice != nil){
+                prevPlayerThrowChoice = playerThrowChoice;
+                DoAIMove();
+                print("Player Move: " + playerThrowChoice!.description)
+                print("AI Move: " + aiThrowCoice.description)
+                switch DetermineThrowWinner(Throw1: playerThrowChoice!, Throw2: aiThrowCoice) {
+                case 0:
+                    //This is a Tie
+                    showTieAlert();
+                    break;
+                case 1:
+                    //Throw1 in this case player 1 will win
+                    showPlayerAlert()
+                    iPlayerWins+=1;
+                    BasicUISetup();
+                    if(iPlayerWins == 3){
+                        PlayerWins();
+                        return;
+                    }
+                    break;
+                case 2:
+                    //Throw2 in this case teh computer will win
+                    showComputerAlert()
+                    iComputerWins+=1;
+                    BasicUISetup();
+                    if(iComputerWins == 3){
+                        ComputerWins();
+                        return;
+                    }
+                    break;
+                default:
+                    break;
+                }
+                btnChooseScisors_Outlet.backgroundColor = .clear;
+                btnChoosePaper_Outlet.backgroundColor = .clear;
+                btnChooseRock_Outlet.backgroundColor = .clear;
+                playerThrowChoice = nil;
+            }
+        }
+        
     }
     @IBAction func btnReturnMainMenu(_ sender: Any) {
         //Return to Main Menu
@@ -269,9 +302,13 @@ class RPS_Play_ViewController: UIViewController {
     }
     func PlayerWins(){
         print("Player Wins!")
+        lblGameTally.text = "Match Complete!\nThe player was the first to win 3 throws!"
+        lbl_AI_Choice.text = "Press the Throw button to reset and play agin."
     }
     func ComputerWins(){
         print("Computer Wins!")
+        lblGameTally.text = "Match Complete!\nThe computer was the first to win 3 throws!"
+        lbl_AI_Choice.text = "Press the Throw button to reset and play agin."
     }
     
     
