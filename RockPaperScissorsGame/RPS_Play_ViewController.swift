@@ -37,7 +37,7 @@ class RPS_Play_ViewController: UIViewController {
     }
     //We give the AI a default value but not the player as we will always need a value for the AI even if the AI breaks otherwise we will break the program. While the Player cannot complete his turn without a value.
     var playerThrowChoice:ThrowChoices?
-    var AIThrowCoice:ThrowChoices = .Paper;
+    var aiThrowCoice:ThrowChoices = .Paper;
     var prevPlayerThrowChoice:ThrowChoices?
     var iPlayerWins:Int = 0;
     var iComputerWins:Int = 0;
@@ -68,7 +68,7 @@ class RPS_Play_ViewController: UIViewController {
         btnChooseRock_Outlet.backgroundColor = .systemGray;
         btnChooseScisors_Outlet.backgroundColor = .clear;
         btnChoosePaper_Outlet.backgroundColor = .clear;
-        print(playerThrowChoice!.description)
+        //print(playerThrowChoice!.description)
     }
     @IBOutlet weak var btnChoosePaper_Outlet: UIButton!
     @IBAction func btnChoosePaper(_ sender: Any) {
@@ -76,7 +76,7 @@ class RPS_Play_ViewController: UIViewController {
         btnChooseScisors_Outlet.backgroundColor = .clear;
         btnChoosePaper_Outlet.backgroundColor = .systemGray;
         btnChooseRock_Outlet.backgroundColor = .clear;
-        print(playerThrowChoice!.description)
+        //print(playerThrowChoice!.description)
     }
     @IBOutlet weak var btnChooseScisors_Outlet: UIButton!
     @IBAction func btnChooseScissors(_ sender: Any) {
@@ -84,40 +84,75 @@ class RPS_Play_ViewController: UIViewController {
         btnChooseScisors_Outlet.backgroundColor = .systemGray;
         btnChoosePaper_Outlet.backgroundColor = .clear;
         btnChooseRock_Outlet.backgroundColor = .clear;
-        print(playerThrowChoice!.description)
+        //print(playerThrowChoice!.description)
     }
     func DoAIMove() {
         switch chosenAI {
         case .RandomAI:
             //Do Random AI
-            AIThrowCoice = DoRandomAIMove()
+            aiThrowCoice = DoRandomAIMove();
+            SetAIMoveChoiceLabel(aiThrowCoice);
             break;
         case .FSM_AI:
             //Do Finite State Machine AI
             break;
         }
     }
-    
+    func showTieAlert() {
+        let alert = UIAlertController(title: "Tie", message: "The Match was a Tie! Throw Again!", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+    }
+    func showPlayerAlert() {
+        let alert = UIAlertController(title: "The Player Wins!", message: "The player won the throw, check the tally!", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+    }
+    func showComputerAlert() {
+        let alert = UIAlertController(title: "The Computer Wins!", message: "The Computer won the throw, check the tally!", preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+    }
     @IBAction func btnMakeThrow(_ sender: Any) {
+        
         if(playerThrowChoice != nil){
             prevPlayerThrowChoice = playerThrowChoice;
             DoAIMove();
-            switch DetermineThrowWinner(Throw1: playerThrowChoice!, Throw2: AIThrowCoice) {
+            print("Player Move: " + playerThrowChoice!.description)
+            print("AI Move: " + aiThrowCoice.description)
+            switch DetermineThrowWinner(Throw1: playerThrowChoice!, Throw2: aiThrowCoice) {
             case 0:
                 //This is a Tie
+                showTieAlert();
                 break;
             case 1:
                 //Throw1 in this case player 1 will win
+                showPlayerAlert()
+                iPlayerWins+=1;
+                BasicUISetup();
+                if(iPlayerWins == 3){
+                    PlayerWins();
+                    return;
+                }
                 break;
             case 2:
                 //Throw2 in this case teh computer will win
+                showComputerAlert()
+                iComputerWins+=1;
+                BasicUISetup();
+                if(iComputerWins == 3){
+                    ComputerWins();
+                    return;
+                }
                 break;
             default:
                 break;
             }
-            return;
+            btnChooseScisors_Outlet.backgroundColor = .clear;
+            btnChoosePaper_Outlet.backgroundColor = .clear;
+            btnChooseRock_Outlet.backgroundColor = .clear;
+            playerThrowChoice = nil;
         }
-        playerThrowChoice = nil;
     }
     @IBAction func btnReturnMainMenu(_ sender: Any) {
         //Return to Main Menu
@@ -201,6 +236,18 @@ class RPS_Play_ViewController: UIViewController {
         
         return ans;
     }
+    func SetAIMoveChoiceLabel(_ ThrowChoice:ThrowChoices){
+        switch ThrowChoice {
+        case .Rock:
+            lbl_AI_Choice.text = sRock;
+        case .Paper:
+            lbl_AI_Choice.text = sPaper;
+        case .Scissors:
+            lbl_AI_Choice.text = sScissors;
+        default:
+            break;
+        }
+    }
     func DoRandomAIMove()->ThrowChoices{
         var ans:ThrowChoices = .Paper;
         
@@ -219,6 +266,12 @@ class RPS_Play_ViewController: UIViewController {
         default:
             return ans;
         }
+    }
+    func PlayerWins(){
+        print("Player Wins!")
+    }
+    func ComputerWins(){
+        print("Computer Wins!")
     }
     
     
