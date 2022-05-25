@@ -199,7 +199,7 @@ class RPS_Play_ViewController: UIViewController {
         btnChoosePaper_Outlet.titleLabel?.adjustsFontSizeToFitWidth = true;
                     
         lbl_AI_Choice.textColor = textColour;
-        lblGameTally.text = "Best of 3- Tally:\nPlayer Wins: " + String(iPlayerWins) + "\nAI Wins: " + String(iComputerWins);
+        lblGameTally.text = "First to 3- Tally:\nPlayer Wins: " + String(iPlayerWins) + "\nAI Wins: " + String(iComputerWins);
     }
     
     //0 = tie, 1 = Throw1, 2 = Throw2
